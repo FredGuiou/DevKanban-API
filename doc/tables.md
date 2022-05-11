@@ -1,6 +1,6 @@
 # MLD O'KANBAN
 
-Label (code label, nom, couleur)
-Liste (code liste, nom, ordre)
-Carte (code carte, nom, ordre, couleur, #code liste)
-Qualifier (code label, code carte)
+label (code label, nom, couleur)
+liste (code liste, nom, ordre)
+carte (code carte, nom, ordre, couleur, #code liste)
+qualifier (code label, code carte)
