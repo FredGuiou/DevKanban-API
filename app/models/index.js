@@ -1,29 +1,34 @@
-const List = require('./list');
-const Card = require('./card');
-const Label = require('./label');
+const List = require("./List");
+const Card = require("./Card");
+const Tag = require("./Tag");
 
-Card.belongsTo(List, {
-    foreignKey: "list_id",
-    as: "list"
+/* ASSOCIATION 0,N */
+List.hasMany(Card,{
+    as:"cards",
+    foreignKey:"list_id"
 });
 
-List.hasMany(Card, {
-    foreignKey: "list_id",
-    as: "cards"
+/* ASSOCIATION 1,1 */
+Card.belongsTo(List,{ // on a belongsTo par rapport à la clef étrangère qui se trouve dans Card
+    as:"list",
+    foreignKey:"list_id"
 });
 
-Card.belongsToMany(Label, {
-    through: "card_has_label",
-    foreignKey: 'card_id',
-    otherKey: 'label_id',
-    as: "labels"
+/* ASSOCIATION N;N entre Card et Tag */
+Card.belongsToMany(Tag,{
+    as:"tags",
+    through:"card_has_tag", // nom de la table d'association
+    foreignKey:"card_id", // correspond à l'id de la carte
+    otherKey:"tag_id", // correspond à l'id du tag associé
+    timestamps: false
 });
 
-Label.belongsToMany(Card, {
-    through: "card_has_label",
-    foreignKey: 'label_id',
-    otherKey: 'card_id',
-    as: "cards"
+Tag.belongsToMany(Card,{
+    as:"cards",
+    through:"card_has_tag", // nom de la table d'association
+    foreignKey:"tag_id", // correspond à l'id de la carte
+    otherKey:"card_id", // correspond à l'id du tag associé
+    timestamps: false
 });
 
-module.exports ={List, Card, Label}
+module.exports = { List, Card, Tag};
