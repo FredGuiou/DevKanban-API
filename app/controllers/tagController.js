@@ -26,6 +26,59 @@ const tagController = {
         res.send("Not found");
     },
 
+    createTag: async (req, res) => {
+        const body = req.body;
+
+        try {
+            if(req.body) {
+                const tag = await Tag.create(body);
+                res.send(tag);
+            } else {
+                res.status(400);
+                res.send("Vous devez inclure un body pour créer un tag via createTag de tagController.js");
+            }
+    
+        } catch(err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la methode createTag de tagController.js");
+            console.error(err);
+        }
+    },
+
+    updateTag: async (req, res) => {
+        
+        const body = req.body;
+        
+        const id = Number(req.params.id);
+
+        
+        if(!isNaN(id)) {
+            
+            const tag = await Tag.update(tag, { where: { id }});
+            res.send(tag);
+            return;
+        } 
+
+        res.status(404);
+        res.send("Vous ne pouvez pas mettre à jour un tag via la méthode UpdateTag de tagController.js");
+
+    },
+
+    deleteTag: async (req, res) => {
+
+        const id = Number(req.params.id);
+
+        if(!isNaN(id)) {
+            const tag = await Tag.findByPk(id);
+            tag.destroy();
+            res.send("Votre tag est supprimée");
+            return;
+        } 
+
+        res.status(404);
+        res.send("Vous ne pouvez pas supprimer un tag via la méthode deleteTag de tagController.js");
+    }
+
 };
 
 module.exports = tagController;
