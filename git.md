@@ -68,8 +68,8 @@ Dans le premier scénario, il faut simplement copier/coller le contenu du README
 
 Dans le deuxième scénario, les étapes sont les suivantes :
 
-1- l'étudiant  récupère le code de la correction
-2- l'étudiant  effectue l'atelier
+1- l'étudiant récupère le code de la correction
+2- l'étudiant effectue l'atelier
 3- l'étudiant push sur son repo
 
 Le lendemain, le même scénario se répète.
