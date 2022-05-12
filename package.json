@@ -1,7 +1,30 @@
 {
   "dependencies": {
     "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "sequelize": "^6.19.0"
-  }
+  },
+  "name": "s06-okanban-fredguiou",
+  "description": "## Jour 3 : Mise en place API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "start": "npx nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Cassini/S06-oKanban-FredGuiou.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Cassini/S06-oKanban-FredGuiou/issues"
+  },
+  "homepage": "https://github.com/O-clock-Cassini/S06-oKanban-FredGuiou#readme"
 }
