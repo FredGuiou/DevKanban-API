@@ -1,8 +1,9 @@
 const mainController = {
 
-    home: (req, res) => {
+    homePage: (req, res) => {
         
-        console.log("Hello world ! ;)");
+        res.send("Welcome to Okanban ! ;)");
+        console.log("Welcome to Okanban ! ;)");
     }
 
 };
