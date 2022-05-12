@@ -11,6 +11,7 @@ Card.init({
     color: DataTypes.TEXT
 }, {
     sequelize,
+    timestamps: false,
     tableName: "card"
 });
 

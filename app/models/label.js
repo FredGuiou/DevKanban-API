@@ -10,6 +10,7 @@ Label.init({
     color: DataTypes.TEXT
 }, {
     sequelize,
+    timestamps: false,
     tableName: "label"
 });
 

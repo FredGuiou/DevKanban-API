@@ -45,7 +45,8 @@ VALUES (1, 'Faire le MCD', '1', 'yellow', 1),
 
 -- Data for label;
 INSERT INTO "label" ("name", "color")
-VALUES ('Urgent', 'Extra');
+VALUES ('Urgent', 'Red'),
+('Extra', 'Blue');
 
 /* On termine la création de la BDD avec un commit*/
 COMMIT;

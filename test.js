@@ -3,11 +3,25 @@ dotenv.config();
 
 const { Card, Label, List } = require('./app/models/index');
 
-let lists = List.findAll();
+
+
+async function allLists() {
+let lists = await List.findAll();
 console.log(lists);
+};
 
-let cards = Card.findAll();
+allLists();
+
+async function allCards() {
+let cards = await Card.findAll();
 console.log(cards);
+};
 
-let labels = Label.findAll();
+allCards();
+
+async function allLabels() {
+let labels = await Label.findAll();
 console.log(labels);
+};
+
+allLabels();

@@ -10,6 +10,7 @@ List.init({
     order: DataTypes.INTEGER
 }, {
     sequelize,
+    timestamps: false,
     tableName: "list"
 });
 
