@@ -3,7 +3,7 @@ const Card = require("../models/Card");
 const cardController = {
 
     all: async (req, res) => {
-        
+
         //Récupérer toutes les cartes//
         const cards = await Card.findAll({});
 
@@ -12,33 +12,42 @@ const cardController = {
 
     getById: async (req, res) => {
         //Récupérer la carte via son id//
-        
+
         const id = Number(req.params.id);
 
-        // Si id différent de NaN
-        if(!isNaN(id)) {
-            const card = await Card.findByPk(id);
-            res.json(card);
-            return;
-        } 
+        try {
+            // Si id différent de NaN
+            if (!isNaN(id)) {
+                const card = await Card.findByPk(id);
+                res.json(card);
+                return;
+            }
 
-        res.status(404);
-        res.send("Not found");
+            res.status(404);
+            res.send("Not found dans le getById de cardController.js");
+
+        } catch (err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la methode getById de cardController.js");
+            console.error(err);
+        }
     },
 
     createCard: async (req, res) => {
         const body = req.body;
 
         try {
-            if(req.body) {
+
+            if (req.body) {
                 const card = await Card.create(body);
                 res.send(card);
-            } else {
+                return;
+            }
                 res.status(400);
                 res.send("Vous devez inclure un body pour créer une carte via createCard de cardController.js");
-            }
-    
-        } catch(err) {
+            
+
+        } catch (err) {
             res.status(500);
             res.send("Une erreur inatendu s'est produit dans la methode createCard de cardController.js");
             console.error(err);
@@ -46,37 +55,51 @@ const cardController = {
     },
 
     updateCard: async (req, res) => {
-        
+
         const body = req.body;
-        
+
         const id = Number(req.params.id);
 
-        
-        if(!isNaN(id)) {
-            
-            const card = await Card.update(card, { where: { id }});
-            res.send(card);
-            return;
-        } 
+        try {
+            if (!isNaN(id)) {
 
-        res.status(404);
-        res.send("Vous ne pouvez pas mettre à jour une carte via la méthode UpdateCard de cardController.js");
+                const card = await Card.update(body, {
+                    where: {
+                        id
+                    }
+                });
+                res.send(card);
+                return;
+            }
 
+            res.status(404);
+            res.send("Vous ne pouvez pas mettre à jour une carte via la méthode UpdateCard de cardController.js");
+
+        } catch (err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la méthode updateCard de cardController.js");
+            console.error(err);
+        }
     },
 
     deleteCard: async (req, res) => {
 
         const id = Number(req.params.id);
+        try {
+            if (!isNaN(id)) {
+                const card = await Card.findByPk(id);
+                card.destroy();
+                res.send("Votre carte est supprimée");
+                return;
+            }
 
-        if(!isNaN(id)) {
-            const card = await Card.findByPk(id);
-            card.destroy();
-            res.send("Votre carte est supprimée");
-            return;
-        } 
-
-        res.status(404);
-        res.send("Vous ne pouvez pas supprimer une carte via la méthode deleteCard de cardController.js");
+            res.status(404);
+            res.send("Vous ne pouvez pas supprimer une carte via la méthode deleteCard de cardController.js");
+        } catch (err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la méthode deleteList de cardController.js");
+            console.error(err);
+        }
     }
 
 };

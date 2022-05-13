@@ -3,7 +3,7 @@ const Tag = require("../models/Tag");
 const tagController = {
 
     all: async (req, res) => {
-        
+
         //Récupérer toutes les tags//
         const tags = await Tag.findAll({});
 
@@ -12,33 +12,42 @@ const tagController = {
 
     getById: async (req, res) => {
         //Récupérer la carte via son id//
-        
+
         const id = Number(req.params.id);
 
-        // Si id différent de NaN
-        if(!isNaN(id)) {
-            const tag = await Tag.findByPk(id);
-            res.json(tag);
-            return;
-        } 
+        try {
+            // Si id différent de NaN
+            if (!isNaN(id)) {
+                const tag = await Tag.findByPk(id);
+                res.json(tag);
+                return;
+            }
 
-        res.status(404);
-        res.send("Not found");
+            res.status(404);
+            res.send("Not found dans le getById de tagController.js");
+
+        } catch (err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la methode getById de tagController.js");
+            console.error(err);
+        }
     },
 
     createTag: async (req, res) => {
         const body = req.body;
 
         try {
-            if(req.body) {
+
+            if (req.body) {
                 const tag = await Tag.create(body);
                 res.send(tag);
-            } else {
-                res.status(400);
-                res.send("Vous devez inclure un body pour créer un tag via createTag de tagController.js");
+                return;
             }
-    
-        } catch(err) {
+            res.status(400);
+            res.send("Vous devez inclure un body pour créer un tag via createTag de tagController.js");
+
+
+        } catch (err) {
             res.status(500);
             res.send("Une erreur inatendu s'est produit dans la methode createTag de tagController.js");
             console.error(err);
@@ -46,37 +55,51 @@ const tagController = {
     },
 
     updateTag: async (req, res) => {
-        
+
         const body = req.body;
-        
+
         const id = Number(req.params.id);
 
-        
-        if(!isNaN(id)) {
-            
-            const tag = await Tag.update(tag, { where: { id }});
-            res.send(tag);
-            return;
-        } 
+        try {
+            if (!isNaN(id)) {
 
-        res.status(404);
-        res.send("Vous ne pouvez pas mettre à jour un tag via la méthode UpdateTag de tagController.js");
+                const tag = await Tag.update(body, {
+                    where: {
+                        id
+                    }
+                });
+                res.send(tag);
+                return;
+            }
 
+            res.status(404);
+            res.send("Vous ne pouvez pas mettre à jour un tag via la méthode UpdateTag de tagController.js");
+
+        } catch (err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la méthode updatetag de tagController.js");
+            console.error(err);
+        }
     },
 
     deleteTag: async (req, res) => {
 
         const id = Number(req.params.id);
+        try {
+            if (!isNaN(id)) {
+                const tag = await Tag.findByPk(id);
+                tag.destroy();
+                res.send("Votre tag est supprimée");
+                return;
+            }
 
-        if(!isNaN(id)) {
-            const tag = await Tag.findByPk(id);
-            tag.destroy();
-            res.send("Votre tag est supprimée");
-            return;
-        } 
-
-        res.status(404);
-        res.send("Vous ne pouvez pas supprimer un tag via la méthode deleteTag de tagController.js");
+            res.status(404);
+            res.send("Vous ne pouvez pas supprimer un tag via la méthode deleteTag de tagController.js");
+        } catch (err) {
+            res.status(500);
+            res.send("Une erreur inatendu s'est produit dans la méthode deleteLists de listController.js");
+            console.error(err);
+        }
     }
 
 };
