@@ -14,21 +14,24 @@ router.get('/', mainController.homePage);
 router.get('/lists', listController.all);
 router.get('/lists/:id', listController.getById);
 router.post('/lists/:id', listController.createList);
-router.post('/lists/edit/:id', listController.updateList);
+router.patch('/lists/:id', listController.updateList);
+router.delete('/lists/:id', listController.deleteList);
 
 
 //----------------cardController----------------//
 router.get('/cards', cardController.all);
 router.get('/cards/:id', cardController.getById);
 router.post('/cards/:id', cardController.createCard);
-router.post('/cards/edit/:id', cardController.updateCard);
+router.patch('/cards/:id', cardController.updateCard);
+router.delete('/cards/:id', cardController.deleteCard);
 
 
 //----------------tagController----------------//
 router.get('/tags', tagController.all);
 router.get('/tags/:id', tagController.getById);
 router.post('/tags/:id', tagController.createTag);
-router.post('/tags/edit/:id', tagController.updateTag);
+router.patch('/tags/:id', tagController.updateTag);
+router.delete('/tags/:id', tagController.deleteTag);
 
 
 module.exports = router;
