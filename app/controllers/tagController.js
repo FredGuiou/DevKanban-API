@@ -2,7 +2,7 @@ const Tag = require("../models/Tag");
 
 const tagController = {
 
-    all: async (req, res) => {
+    async all (req, res) {
 
         //Récupérer toutes les tags//
         const tags = await Tag.findAll({});
@@ -10,7 +10,7 @@ const tagController = {
         res.json(tags);
     },
 
-    getById: async (req, res) => {
+    async getById (req, res) {
         //Récupérer la carte via son id//
 
         const id = Number(req.params.id);
@@ -33,7 +33,7 @@ const tagController = {
         }
     },
 
-    createTag: async (req, res) => {
+    async createTag (req, res) {
         const body = req.body;
 
         try {
@@ -54,7 +54,7 @@ const tagController = {
         }
     },
 
-    updateTag: async (req, res) => {
+    async updateTag (req, res) {
 
         const body = req.body;
 
@@ -82,7 +82,7 @@ const tagController = {
         }
     },
 
-    deleteTag: async (req, res) => {
+    async deleteTag (req, res) {
 
         const id = Number(req.params.id);
         try {

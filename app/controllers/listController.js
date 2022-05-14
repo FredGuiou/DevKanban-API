@@ -2,7 +2,7 @@ const List = require("../models/List");
 
 const listController = {
 
-    all: async (req, res) => {
+    async all (req, res) {
         //Récupérer toutes les listes//
 
         const lists = await List.findAll({});
@@ -10,7 +10,7 @@ const listController = {
         res.json(lists);
     },
 
-    getById: async (req, res) => {
+    async getById (req, res) {
         //Récupérer la liste via son id//
 
         const id = Number(req.params.id);
@@ -33,7 +33,8 @@ const listController = {
         }
     },
 
-    createList: async (req, res) => {
+    async createList (req, res) {
+
         const body = req.body;
 
         try {
@@ -54,7 +55,7 @@ const listController = {
         }
     },
 
-    updateList: async (req, res) => {
+    async updateList (req, res) {
 
         const body = req.body;
 
@@ -77,12 +78,12 @@ const listController = {
 
         } catch (err) {
             res.status(500);
-            res.send("Une erreur inatendu s'est produit dans la méthode updateLists de listController.js");
+            res.send("Une erreur inatendue s'est produit dans la méthode updateLists de listController.js");
             console.error(err);
         }
     },
 
-    deleteList: async (req, res) => {
+    async deleteList (req, res) {
 
         const id = Number(req.params.id);
         try {
