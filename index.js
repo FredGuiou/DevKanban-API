@@ -9,11 +9,11 @@ const app = express();
 
 app.use(express.urlencoded({ extended : true }));
 
+app.use(cors({
+    origin:"http://localhost:3000"
+}));
+
 app.use(router);
-
-app.use(cors('*'));
-
-// app.use(express.static('public'));
 
 app.listen(port, _ => {
     console.log(`Serveur lancé sur le http://localhost:${port}`);
